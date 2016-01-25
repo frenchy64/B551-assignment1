@@ -26,9 +26,9 @@ public class SearchStrategies {
 
         assert words.length == 3;
 
-        String s = words[0];
-        String e = words[1];
-        Integer c = Integer.parseInt(words[2]);
+        String s = words[0].trim();
+        String e = words[1].trim();
+        Integer c = Integer.parseInt(words[2].trim());
 
         // insert forward edge
         if (!m.containsKey(s)) {
@@ -252,12 +252,12 @@ public class SearchStrategies {
     while (true) {
       System.out.println("Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:");
 
-      final String[] input = br.readLine().split(" ");
+      final String[] input = br.readLine().split(",");
 
       if (input.length == 3) {
-        final String start = input[0];
-        final String end = input[1];
-        final String strategy = input[2];
+        final String start = input[0].trim();
+        final String end = input[1].trim();
+        final String strategy = input[2].trim();
 
         Result r;
         if (strategy.equals("DFS")) {
