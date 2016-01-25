@@ -35,6 +35,7 @@ public class SearchTest {
 
   public static Map<String, Map<String,Integer>> g = SearchStrategies.readGraph("map1.txt");
   public static Map<String, Map<String,Integer>> g2 = SearchStrategies.readGraph("map2.txt");
+  public static Map<String, Map<String,Integer>> g3 = SearchStrategies.readGraph("romania.txt");
 
   @Test
   public void bfsFail1() {
@@ -317,5 +318,136 @@ public class SearchTest {
     System.out.println(expected_res);
 
     assertTrue(expected_res.equals(r));
+  }
+
+  @Test
+  public void romaniaDFS() {
+    Result r = SearchStrategies.findDFSPath(g3, "Arad", "Bucharest");
+
+    List<String> expected = new LinkedList();
+    expected.add("Arad");
+    expected.add("Zerind");
+    expected.add("Oradea");
+    expected.add("Sibiu");
+    expected.add("Rimnicu Vilcea");
+    expected.add("Pitesti");
+    expected.add("Bucharest");
+
+    Result expected_res = new Result(expected, 575);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  @Test
+  public void romaniaBFSandIDS() {
+    Result r1 = SearchStrategies.findBFSPath(g3, "Arad", "Bucharest");
+    Result r2 = SearchStrategies.findIDSPath(g3, "Arad", "Bucharest");
+
+    List<String> expected = new LinkedList();
+    expected.add("Arad");
+    expected.add("Sibiu");
+    expected.add("Fagaras");
+    expected.add("Bucharest");
+
+    Result expected_res = new Result(expected, 450);
+
+    System.out.println(r1);
+    System.out.println(r2);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r1));
+    assertTrue(expected_res.equals(r2));
+  }
+
+  @Test
+  public void romaniaDFSSibiu() {
+    Result r = SearchStrategies.findDFSPath(g3, "Sibiu", "Eforie");
+
+    List<String> expected = new LinkedList();
+    expected.add("Sibiu");
+    expected.add("Rimnicu Vilcea");
+    expected.add("Pitesti");
+    expected.add("Bucharest");
+    expected.add("Urziceni");
+    expected.add("Hirsova");
+    expected.add("Eforie");
+
+    Result expected_res = new Result(expected, 547);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  @Test
+  public void romaniaBFSandIDSSibiu() {
+    Result r1 = SearchStrategies.findBFSPath(g3, "Sibiu", "Eforie");
+    Result r2 = SearchStrategies.findIDSPath(g3, "Sibiu", "Eforie");
+
+    List<String> expected = new LinkedList();
+    expected.add("Sibiu");
+    expected.add("Fagaras");
+    expected.add("Bucharest");
+    expected.add("Urziceni");
+    expected.add("Hirsova");
+    expected.add("Eforie");
+
+    Result expected_res = new Result(expected, 579);
+
+    System.out.println(r1);
+    System.out.println(r2);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r1));
+    assertTrue(expected_res.equals(r2));
+  }
+
+  @Test
+  public void romaniaDFSDrobeta() {
+    Result r = SearchStrategies.findDFSPath(g3, "Drobeta", "Fagaras");
+
+    List<String> expected = new LinkedList();
+    expected.add("Drobeta");
+    expected.add("Mehadia");
+    expected.add("Lugoj");
+    expected.add("Timisoara");
+    expected.add("Arad");
+    expected.add("Zerind");
+    expected.add("Oradea");
+    expected.add("Sibiu");
+    expected.add("Fagaras");
+
+    Result expected_res = new Result(expected, 770);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  @Test
+  public void romaniaBFSandIDSDrobeta() {
+    Result r1 = SearchStrategies.findBFSPath(g3, "Drobeta", "Fagaras");
+    Result r2 = SearchStrategies.findIDSPath(g3, "Drobeta", "Fagaras");
+
+    List<String> expected = new LinkedList();
+    expected.add("Drobeta");
+    expected.add("Craiova");
+    expected.add("Pitesti");
+    expected.add("Bucharest");
+    expected.add("Fagaras");
+
+    Result expected_res = new Result(expected, 570);
+
+    System.out.println(r1);
+    System.out.println(r2);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r1));
+    assertTrue(expected_res.equals(r2));
   }
 }

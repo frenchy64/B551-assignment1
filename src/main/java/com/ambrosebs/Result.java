@@ -38,7 +38,7 @@ public final class Result {
         if ((this.path == null) ? (other.path != null) : !this.path.equals(other.path)) {
             return false;
         }
-        if (this.cost != other.cost) {
+        if (!this.cost.equals(other.cost)) {
             return false;
         }
         return true;

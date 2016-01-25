@@ -250,7 +250,7 @@ public class SearchStrategies {
     Map<String,Map<String,Integer>> g = readGraph(filename);
 
     while (true) {
-      System.out.println("Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:");
+      System.out.println("Enter query (eg. `Arad, Bucharest, DFS`) [DFS/BFS/IDS]:");
 
       final String[] input = br.readLine().split(",");
 

@@ -37,7 +37,7 @@ Then you can query the graph using query triples. The results of the search show
 
 \begin{verbatim}
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Arad Bucharest DFS
+Arad, Bucharest, DFS
 [Arad, Zerind, Oradea, Sibiu, RimnicuVilcea, Pitesti, Bucharest], 575
 \end{verbatim}
 
@@ -46,44 +46,47 @@ See the next section for example queries.
 \section{Example execution}
 
 \begin{verbatim}
-ambrose@ambrose-VirtualBox:~/Projects/B551/assignment1$ ./run.sh
+ambrose@ambrose-VirtualBox:~/Projects/B551/assignment1$ ./run.sh 
+
 Enter filename for graph:
 romania.txt
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Arad Bucharest DFS
-[Arad, Zerind, Oradea, Sibiu, RimnicuVilcea, Pitesti, Bucharest], 575
+Arad, Bucharest, DFS
+[Arad, Zerind, Oradea, Sibiu, Rimnicu Vilcea, Pitesti, Bucharest], 575
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Arad Bucharest BFS
+Arad, Bucharest, BFS
 [Arad, Sibiu, Fagaras, Bucharest], 450
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Arad Bucharest IDS
+Arad, Bucharest, IDS
 [Arad, Sibiu, Fagaras, Bucharest], 450
 
-Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Sibiu Eforie DFS
-[Sibiu, RimnicuVilcea, Pitesti, Bucharest, Urziceni, Hirsova, Eforie], 547
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Sibiu Eforie BFS
+Sibiu, Eforie, DFS
+[Sibiu, Rimnicu Vilcea, Pitesti, Bucharest, Urziceni, Hirsova, Eforie], 547
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu, Eforie, BFS
 [Sibiu, Fagaras, Bucharest, Urziceni, Hirsova, Eforie], 579
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Sibiu Eforie IDS
+Sibiu, Eforie, IDS
 [Sibiu, Fagaras, Bucharest, Urziceni, Hirsova, Eforie], 579
 
+
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Drobeta Fagaras DFS
+Drobeta, Fagaras, DFS
 [Drobeta, Mehadia, Lugoj, Timisoara, Arad, Zerind, Oradea, Sibiu, Fagaras], 770
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Drobeta Fagaras BFS
+Drobeta, Fagaras, BFS
 [Drobeta, Craiova, Pitesti, Bucharest, Fagaras], 570
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
-Drobeta Fagaras IDS
+Drobeta, Fagaras, IDS
 [Drobeta, Craiova, Pitesti, Bucharest, Fagaras], 570
 
 Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
