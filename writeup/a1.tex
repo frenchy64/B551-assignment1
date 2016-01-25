@@ -1,0 +1,92 @@
+\documentclass[10pt]{article}
+
+\usepackage{geometry}
+\geometry{
+left=1in,
+right=1in,
+top=1in,
+bottom=1in,
+}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\begin{document}
+\title{B551 - Assignment 1}
+\author{Ambrose Bonnaire-Sergeant (0003410123)}
+
+\maketitle
+
+\section{Usage}
+
+To run, execute the following command. Maven2 must be installed to build the project.
+
+\begin{verbatim}
+ambrose@ambrose-VirtualBox:~/Projects/B551/assignment1$ ./run.sh
+\end{verbatim}
+
+Then enter the filename containing your graph. See \textbf{romania.txt} for an example input.
+
+\begin{verbatim}
+Enter filename for graph:
+romania.txt
+\end{verbatim}
+
+Then you can query the graph using query triples. The results of the search show up on the next line.
+
+\begin{verbatim}
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest DFS
+[Arad, Zerind, Oradea, Sibiu, RimnicuVilcea, Pitesti, Bucharest], 575
+\end{verbatim}
+
+See the next section for example queries.
+
+\section{Example execution}
+
+\begin{verbatim}
+ambrose@ambrose-VirtualBox:~/Projects/B551/assignment1$ ./run.sh
+Enter filename for graph:
+romania.txt
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest DFS
+[Arad, Zerind, Oradea, Sibiu, RimnicuVilcea, Pitesti, Bucharest], 575
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest BFS
+[Arad, Sibiu, Fagaras, Bucharest], 450
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest IDS
+[Arad, Sibiu, Fagaras, Bucharest], 450
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu Eforie DFS
+[Sibiu, RimnicuVilcea, Pitesti, Bucharest, Urziceni, Hirsova, Eforie], 547
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu Eforie BFS
+[Sibiu, Fagaras, Bucharest, Urziceni, Hirsova, Eforie], 579
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu Eforie IDS
+[Sibiu, Fagaras, Bucharest, Urziceni, Hirsova, Eforie], 579
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Drobeta Fagaras DFS
+[Drobeta, Mehadia, Lugoj, Timisoara, Arad, Zerind, Oradea, Sibiu, Fagaras], 770
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Drobeta Fagaras BFS
+[Drobeta, Craiova, Pitesti, Bucharest, Fagaras], 570
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Drobeta Fagaras IDS
+[Drobeta, Craiova, Pitesti, Bucharest, Fagaras], 570
+
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+
+\end{verbatim}
+\end{document}
