@@ -37,6 +37,22 @@ public class SearchTest {
 
   // forwards single edge
   @Test
+  public void bfsPathIdentity() {
+    Result r = SearchStrategies.findBFSPath(g, "A", "A");
+
+    List<String> expected = new LinkedList();
+    expected.add("A");
+
+    Result expected_res = new Result(expected, 0);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // forwards single edge
+  @Test
   public void bfsPath1() {
     Result r = SearchStrategies.findBFSPath(g, "A", "D");
 
@@ -70,6 +86,70 @@ public class SearchTest {
   @Test
   public void bfsPath3() {
     Result r = SearchStrategies.findBFSPath(g, "A", "C");
+
+    List<String> expected = new LinkedList();
+    expected.add("A"); expected.add("D");
+    expected.add("C");
+
+    Result expected_res = new Result(expected, 4);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // forwards single edge
+  @Test
+  public void dfsPathIdentity() {
+    Result r = SearchStrategies.findDFSPath(g, "A", "A");
+
+    List<String> expected = new LinkedList();
+    expected.add("A");
+
+    Result expected_res = new Result(expected, 0);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // forwards single edge
+  @Test
+  public void dfsPath1() {
+    Result r = SearchStrategies.findDFSPath(g, "A", "D");
+
+    List<String> expected = new LinkedList();
+    expected.add("A"); expected.add("D");
+
+    Result expected_res = new Result(expected, 2);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // backwards single edge
+  @Test
+  public void dfsPath2() {
+    Result r = SearchStrategies.findDFSPath(g, "D", "A");
+
+    List<String> expected = new LinkedList();
+    expected.add("D"); expected.add("A");
+
+    Result expected_res = new Result(expected, 2);
+
+    System.out.println(r);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // 2 edges
+  @Test
+  public void dfsPath3() {
+    Result r = SearchStrategies.findDFSPath(g, "A", "C");
 
     List<String> expected = new LinkedList();
     expected.add("A"); expected.add("D");

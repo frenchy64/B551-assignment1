@@ -6,6 +6,16 @@ import java.util.*;
 
 public class SearchStrategies {
 
+  /**
+   * Generate a graph from a file.
+   *
+   * Format:
+   *   Edge1 Edge2 42
+   *   Edge2 Edge3 24
+   *
+   * @param filename  the name of the file containing the graph
+   * @return a new graph
+   */
   public static Map<String,Map<String,Integer>> readGraph(final String filename) {
     try {
       Scanner scanner = new Scanner(new File(filename));
@@ -71,6 +81,16 @@ public class SearchStrategies {
     return findDBFSPath(g, start, end, "DFS");
   }
 
+  /**
+   * Implements Breadth-First-Search on page 82, with option to
+   * switch to DFS via a Stack.
+   *
+   * @param g      graph
+   * @param start  starting node
+   * @param end    ending node
+   * @param strategy  if "BFS", perform BFS, else if "DFS", perform DFS
+   * @return the result of the search
+   */
   public static Result findDBFSPath(final Map<String,Map<String,Integer>> g,
                                     final String start,
                                     final String end,
@@ -112,8 +132,9 @@ public class SearchStrategies {
         List<String> new_path = (LinkedList<String>)((LinkedList<String>)(node.path)).clone();
         // functionally update path
         new_path.add(entry.getKey());
-        Node
-                child = new Node(entry.getKey(),
+
+        Node child = new Node(
+                entry.getKey(),
                 node.path_cost + entry.getValue(),
                 new_path);
         if (!explored.contains(child.state) && !frontier.contains(child.state)) {
@@ -125,7 +146,7 @@ public class SearchStrategies {
       }
     }
 
-    return null; // FAILURE
+    throw new RuntimeException("Search algorithm failed.");
   }
 
   public static void main(String[] argv) {
