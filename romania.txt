@@ -21,4 +21,3 @@ Urziceni, Hirsova, 98
 Hirsova, Eforie, 86
 Vaslui, Iasi, 92
 Iasi, Neamt, 87
-
