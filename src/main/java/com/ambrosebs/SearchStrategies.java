@@ -22,7 +22,7 @@ public class SearchStrategies {
 
       while(scanner.hasNext()) {
         String line = scanner.nextLine();
-        String[] words = line.split(" ");
+        String[] words = line.split(",");
 
         assert words.length == 3;
 
