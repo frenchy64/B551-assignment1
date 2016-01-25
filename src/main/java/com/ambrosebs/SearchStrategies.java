@@ -1,7 +1,6 @@
 package com.ambrosebs;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 public class SearchStrategies {
@@ -116,16 +115,10 @@ public class SearchStrategies {
 
     // updated in place
     Deque<Node> frontier = new ArrayDeque<Node>();
-    if (strategy.equals("BFS")) {
-      // Queue
-      frontier.addLast(node);
-    } else {
-      // Stack
-      frontier.addFirst(node);
-    }
+    addWithStrategy(strategy, frontier, node);
 
     while(true) {
-      System.out.println("Frontier: "+frontier);
+      //System.out.println("Frontier: "+frontier);
       if (frontier.isEmpty()) {
         break;
       }
@@ -147,13 +140,7 @@ public class SearchStrategies {
             return new Result(child.path, child.path_cost);
           }
 
-          if (strategy.equals("BFS")) {
-            // Queue
-            frontier.addLast(child);
-          } else {
-            // Stack
-            frontier.addFirst(child);
-          }
+          addWithStrategy(strategy, frontier, child);
         }
       }
     }
@@ -161,7 +148,66 @@ public class SearchStrategies {
     throw new RuntimeException("Search algorithm failed.");
   }
 
-  public static void main(String[] argv) {
+  /**
+   * Add to a deque as a Queue if strategy is "BFS", or
+   * as a Stack if strategy is "DFS".
+   *
+   * @param strategy either "BFS" or "DFS
+   * @param frontier acts as either a queue or stack
+   * @param node the node to append
+     */
+  public static void addWithStrategy(String strategy, Deque<Node> frontier, Node node) {
+    assert strategy != null;
 
+    if (strategy.equals("BFS")) {
+      // Queue
+      frontier.addLast(node);
+    } else {
+      // Stack
+      frontier.addFirst(node);
+    }
+  }
+
+  /**
+   * Starts a console interaction to specify graph input and
+   * any number of queries.
+   *
+   * @param argv
+   * @throws IOException
+   */
+  public static void main(String[] argv) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    System.out.println("Enter filename for graph:");
+
+    final String filename = br.readLine();
+
+    Map<String,Map<String,Integer>> g = readGraph(filename);
+
+    while (true) {
+      System.out.println("Enter query (eg. `Arad Bucharest DFS`):");
+
+      final String[] input = br.readLine().split(" ");
+
+      if (input.length == 3) {
+        String start = input[0];
+        String end = input[1];
+        String strategy = input[2];
+
+        Result r;
+        if (strategy.equals("DFS")) {
+          r = findDFSPath(g, start, end);
+        } else if (strategy.equals("BFS")) {
+          r = findBFSPath(g, start, end);
+        } else {
+          System.out.println("Unrecognised search strategy: " + strategy);
+          continue;
+        }
+
+        System.out.println(r.path.toString() + ", " + r.cost);
+      } else {
+        System.out.println("Error, must provide only 3 words");
+      }
+    }
   }
 }
