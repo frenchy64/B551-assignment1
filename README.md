@@ -2,6 +2,10 @@
 
 # Usage
 
+To run: 
+
 ```java
-java -jar B551assignment1.jar
+./run.sh
 ```
+
+See `a1.pdf` for usage.
