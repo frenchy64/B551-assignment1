@@ -47,9 +47,73 @@ public class SearchStrategies {
 
       return m;
     } catch (FileNotFoundException e) {
-      Util.sneakyRethrow(e);
+      throw new RuntimeException(e);
     }
-    return null; //unreachable
+  }
+
+  public static Result findIDSPath(final Map<String,Map<String,Integer>> g,
+                                         final String start,
+                                         final String end) {
+    for (int i = 0; true; i++) {
+      RDLSResult r = depthLimitedSearch(g, start, end, i);
+      if (r.r != null) {
+        // Success
+        return r.r;
+      } else if (r.cutoffOccurred == null) {
+        // No success or cutoff, must be failure
+        return null;
+      }
+    }
+  }
+
+  public static RDLSResult depthLimitedSearch(Map<String, Map<String, Integer>> g,
+                                          String start, String end, int limit) {
+    Node node = new Node(start, 0, new LinkedList());
+    node.path.add(node.state);
+
+    return recursiveDLS(g, start, end, limit, node);
+  }
+
+  private static RDLSResult recursiveDLS(final Map<String, Map<String, Integer>> g,
+                                         final String start, final String end, final int limit,
+                                         final Node node) {
+    if (node.state.equals(end)) {
+      // Success
+      return new RDLSResult(new Result(node.path, node.path_cost), null);
+    } else if (limit == 0) {
+      // Cutoff
+      return new RDLSResult(null, 0);
+    } else {
+      Integer cutoffOccurred = null;
+
+
+      if (g.get(node.state) != null) {
+        for (Map.Entry<String, Integer> entry : g.get(node.state).entrySet()) {
+          List<String> newPath = (LinkedList<String>) ((LinkedList<String>) (node.path)).clone();
+          // functionally update path
+          newPath.add(entry.getKey());
+
+          final Node child = new Node(entry.getKey(), node.path_cost + entry.getValue(),
+                  newPath);
+
+          RDLSResult r = recursiveDLS(g, start, end, limit - 1, child);
+
+          if (r.cutoffOccurred != null) {
+            cutoffOccurred = r.cutoffOccurred;
+          } else if (r.r != null) {
+            return r;
+          }
+        }
+      }
+
+      if (cutoffOccurred != null) {
+        // cutoff
+        return new RDLSResult(null, cutoffOccurred);
+      } else {
+        // failure
+        return new RDLSResult(null, null);
+      }
+    }
   }
 
   /**
@@ -98,8 +162,6 @@ public class SearchStrategies {
     assert start != null;
     assert end != null;
     assert strategy != null;
-    assert g.containsKey(start);
-    assert g.containsKey(end);
     assert strategy.equals("DFS") || strategy.equals("BFS");
 
     // updated in place
@@ -126,15 +188,18 @@ public class SearchStrategies {
       node = frontier.removeFirst();
       explored.add(node.state);
 
+      if (g.get(node.state) == null) {
+        continue;
+      }
       for (Map.Entry<String, Integer> entry: g.get(node.state).entrySet()) {
-        List<String> new_path = (LinkedList<String>)((LinkedList<String>)(node.path)).clone();
+        List<String> newPath = (LinkedList<String>)((LinkedList<String>)(node.path)).clone();
         // functionally update path
-        new_path.add(entry.getKey());
+        newPath.add(entry.getKey());
 
         Node child = new Node(
                 entry.getKey(),
                 node.path_cost + entry.getValue(),
-                new_path);
+                newPath);
         if (!explored.contains(child.state) && !frontier.contains(child.state)) {
           if (child.state.equals(end)) {
             return new Result(child.path, child.path_cost);
@@ -145,7 +210,7 @@ public class SearchStrategies {
       }
     }
 
-    throw new RuntimeException("Search algorithm failed.");
+    return null;
   }
 
   /**
@@ -185,26 +250,32 @@ public class SearchStrategies {
     Map<String,Map<String,Integer>> g = readGraph(filename);
 
     while (true) {
-      System.out.println("Enter query (eg. `Arad Bucharest DFS`):");
+      System.out.println("Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:");
 
       final String[] input = br.readLine().split(" ");
 
       if (input.length == 3) {
-        String start = input[0];
-        String end = input[1];
-        String strategy = input[2];
+        final String start = input[0];
+        final String end = input[1];
+        final String strategy = input[2];
 
         Result r;
         if (strategy.equals("DFS")) {
           r = findDFSPath(g, start, end);
         } else if (strategy.equals("BFS")) {
           r = findBFSPath(g, start, end);
+        } else if (strategy.equals("IDS")) {
+          r = findIDSPath(g, start, end);
         } else {
           System.out.println("Unrecognised search strategy: " + strategy);
           continue;
         }
 
-        System.out.println(r.path.toString() + ", " + r.cost);
+        if (r == null) {
+          System.out.println("Search failed!");
+        } else {
+          System.out.println(r.path.toString() + ", " + r.cost);
+        }
       } else {
         System.out.println("Error, must provide only 3 words");
       }

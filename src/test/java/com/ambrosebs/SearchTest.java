@@ -36,6 +36,42 @@ public class SearchTest {
   public static Map<String, Map<String,Integer>> g = SearchStrategies.readGraph("map1.txt");
   public static Map<String, Map<String,Integer>> g2 = SearchStrategies.readGraph("map2.txt");
 
+  @Test
+  public void bfsFail1() {
+    Result r = SearchStrategies.findBFSPath(g, "J", "K");
+
+    Result expected_res = null;
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res == r);
+  }
+
+  @Test
+  public void dfsFail1() {
+    Result r = SearchStrategies.findDFSPath(g, "J", "K");
+
+    Result expected_res = null;
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res == r);
+  }
+
+  @Test
+  public void idsFail1() {
+    Result r = SearchStrategies.findIDSPath(g, "J", "K");
+
+    Result expected_res = null;
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res == r);
+  }
+
   // forwards single edge
   @Test
   public void bfsPathIdentity() {
@@ -187,6 +223,88 @@ public class SearchTest {
   @Test
   public void bfsMap2() {
     Result r = SearchStrategies.findBFSPath(g2, "A", "E");
+
+    List<String> expected = new LinkedList();
+    expected.add("A");
+    expected.add("F");
+    expected.add("E");
+
+    Result expected_res = new Result(expected, 4);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // forwards single edge
+  @Test
+  public void idsPathIdentity() {
+    Result r = SearchStrategies.findIDSPath(g, "A", "A");
+
+    List<String> expected = new LinkedList();
+    expected.add("A");
+
+    Result expected_res = new Result(expected, 0);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // forwards single edge
+  @Test
+  public void idsPath1() {
+    Result r = SearchStrategies.findIDSPath(g, "A", "D");
+
+    List<String> expected = new LinkedList();
+    expected.add("A"); expected.add("D");
+
+    Result expected_res = new Result(expected, 2);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // backwards single edge
+  @Test
+  public void idsPath2() {
+    Result r = SearchStrategies.findIDSPath(g, "D", "A");
+
+    List<String> expected = new LinkedList();
+    expected.add("D"); expected.add("A");
+
+    Result expected_res = new Result(expected, 2);
+
+    System.out.println(r);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // 2 edges
+  @Test
+  public void idsPath3() {
+    Result r = SearchStrategies.findIDSPath(g, "A", "C");
+
+    List<String> expected = new LinkedList();
+    expected.add("A"); expected.add("D");
+    expected.add("C");
+
+    Result expected_res = new Result(expected, 4);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // 2 edges
+  @Test
+  public void idsMap2() {
+    Result r = SearchStrategies.findIDSPath(g2, "A", "E");
 
     List<String> expected = new LinkedList();
     expected.add("A");
