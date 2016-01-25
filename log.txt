@@ -1,0 +1,32 @@
+ambrose@ambrose-VirtualBox:~/Projects/B551/assignment1$ rlwrap java -jar target/B551assignment1-0.0.1-SNAPSHOT.jar 
+Enter filename for graph:
+romania.txt
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest DFS
+[Arad, Zerind, Oradea, Sibiu, RimnicuVilcea, Pitesti, Bucharest], 575
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest BFS
+[Arad, Sibiu, Fagaras, Bucharest], 450
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Arad Bucharest IDS
+[Arad, Sibiu, Fagaras, Bucharest], 450
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu Eforie DFS
+[Sibiu, RimnicuVilcea, Pitesti, Bucharest, Urziceni, Hirsova, Eforie], 547
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu Eforie BFS
+[Sibiu, Fagaras, Bucharest, Urziceni, Hirsova, Eforie], 579
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Sibiu Eforie IDS
+[Sibiu, Fagaras, Bucharest, Urziceni, Hirsova, Eforie], 579
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Drobeta Fagaras DFS
+[Drobeta, Mehadia, Lugoj, Timisoara, Arad, Zerind, Oradea, Sibiu, Fagaras], 770
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Drobeta Fagaras BFS
+[Drobeta, Craiova, Pitesti, Bucharest, Fagaras], 570
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+Drobeta Fagaras IDS
+[Drobeta, Craiova, Pitesti, Bucharest, Fagaras], 570
+Enter query (eg. `Arad Bucharest DFS`) [DFS/BFS/IDS]:
+
