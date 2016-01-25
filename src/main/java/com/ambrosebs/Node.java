@@ -21,6 +21,6 @@ public final class Node {
 
     @Override
     public String toString() {
-        return state.toString() + ", " + path_cost.toString() + ", " + path.toString();
+        return "Node #{" + "Name: " + state.toString() + "; Cost: " + path_cost.toString() + "; Path: " + path.toString() + "}";
     }
 }

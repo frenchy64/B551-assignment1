@@ -95,6 +95,10 @@ public class SearchStrategies {
                                     final String start,
                                     final String end,
                                     final String strategy) {
+    assert g != null;
+    assert start != null;
+    assert end != null;
+    assert strategy != null;
     assert g.containsKey(start);
     assert g.containsKey(end);
     assert strategy.equals("DFS") || strategy.equals("BFS");
@@ -121,6 +125,7 @@ public class SearchStrategies {
     }
 
     while(true) {
+      System.out.println("Frontier: "+frontier);
       if (frontier.isEmpty()) {
         break;
       }
@@ -141,7 +146,14 @@ public class SearchStrategies {
           if (child.state.equals(end)) {
             return new Result(child.path, child.path_cost);
           }
-          frontier.add(child);
+
+          if (strategy.equals("BFS")) {
+            // Queue
+            frontier.addLast(child);
+          } else {
+            // Stack
+            frontier.addFirst(child);
+          }
         }
       }
     }

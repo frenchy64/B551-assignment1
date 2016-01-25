@@ -34,6 +34,7 @@ public class SearchTest {
   }
 
   public static Map<String, Map<String,Integer>> g = SearchStrategies.readGraph("map1.txt");
+  public static Map<String, Map<String,Integer>> g2 = SearchStrategies.readGraph("map2.txt");
 
   // forwards single edge
   @Test
@@ -154,6 +155,43 @@ public class SearchTest {
     List<String> expected = new LinkedList();
     expected.add("A"); expected.add("D");
     expected.add("C");
+
+    Result expected_res = new Result(expected, 4);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // 2 edges
+  @Test
+  public void dfsMap2() {
+    Result r = SearchStrategies.findDFSPath(g2, "A", "E");
+
+    List<String> expected = new LinkedList();
+    expected.add("A");
+    expected.add("G");
+    expected.add("H");
+    expected.add("E");
+
+    Result expected_res = new Result(expected, 6);
+
+    System.out.println(r);
+    System.out.println(expected_res);
+
+    assertTrue(expected_res.equals(r));
+  }
+
+  // 2 edges
+  @Test
+  public void bfsMap2() {
+    Result r = SearchStrategies.findBFSPath(g2, "A", "E");
+
+    List<String> expected = new LinkedList();
+    expected.add("A");
+    expected.add("F");
+    expected.add("E");
 
     Result expected_res = new Result(expected, 4);
 
